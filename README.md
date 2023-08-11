@@ -1,2 +1,2 @@
-# pubmatic-openwrap-sdk-react-native-plugin
+# react-native-openwrap-sdk
 ITG-93654
