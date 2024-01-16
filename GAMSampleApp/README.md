@@ -1,41 +1,42 @@
-- [OpenWrap SDK Sample App for GAM Header Bidding](#openwrap-sdk-sample-app-for-gam-header-bidding)
+- [OpenWrap SDK Sample App for GAM header bidding](#openwrap-sdk-sample-app-for-gam-header-bidding)
   - [Description](#description)
-  - [Flow Diagram](#flow-diagram)
-  - [Compatibility Matrix](#compatibility-matrix)
-  - [How to Run](#how-to-run)
+  - [Flow diagram](#flow-diagram)
+  - [Compatibility matrix](#compatibility-matrix)
+  - [How to run](#how-to-run)
       - [Clone the repo \& follow the below steps:](#clone-the-repo--follow-the-below-steps)
   - [Prerequisites](#prerequisites)
-  - [Getting Started Android](#getting-started-android)
+  - [Getting started Android](#getting-started-android)
     - [Integrate OpenWrap SDK](#integrate-openwrap-sdk)
     - [Integrate the Google Mobile Ads SDK (GAM)](#integrate-the-google-mobile-ads-sdk-gam)
-  - [Getting Started iOS](#getting-started-ios)
+  - [Getting started iOS](#getting-started-ios)
     - [Integrate OpenWrap SDK](#integrate-openwrap-sdk-1)
     - [Integrate the Google Mobile Ads SDK (GAM)](#integrate-the-google-mobile-ads-sdk-gam-1)
   - [Mandatory global configuration](#mandatory-global-configuration)
-  - [Show Banner Ads](#show-banner-ads)
+  - [Show banner ads](#show-banner-ads)
       - [Step 1: Android/iOS specific implementation](#step-1-androidios-specific-implementation)
       - [Step 2: JS implementation](#step-2-js-implementation)
-  - [Show Interstitial Ads](#show-interstitial-ads)
+  - [Show interstitial ads](#show-interstitial-ads)
       - [Step1: Android/iOS specific implementation](#step1-androidios-specific-implementation)
       - [Step 2: JS implementation](#step-2-js-implementation-1)
-  - [Show Rewarded Ads](#show-rewarded-ads)
+  - [Show rewarded ads](#show-rewarded-ads)
       - [Step 1: Android/iOS specific implementation](#step-1-androidios-specific-implementation-1)
       - [Step 2: JS implementation](#step-2-js-implementation-2)
   - [Test and debug your integration](#test-and-debug-your-integration)
     - [Test profile/placements](#test-profileplacements)
     - [Enable SDK logs](#enable-sdk-logs)
-    - [Advanced Topics](#advanced-topics)
+    - [Advanced topics](#advanced-topics)
   - [Support](#support)
+  - [License](#license)
 
-# OpenWrap SDK Sample App for GAM Header Bidding
+# OpenWrap SDK Sample App for GAM header bidding
 
 ## Description
-GAM Sample app demonstrates the delivery of ads using OpenWrap SDK via GAM Header bidding.
+GAM Sample App demonstrates the delivery of ads using OpenWrap SDK via GAM header bidding.
 
-## Flow Diagram
+## Flow diagram
 <img src="./GAM_Header_Bidding.png" alt="Flow Diagram" />
 
-## Compatibility Matrix
+## Compatibility matrix
 
 | Platform | OpenWrap SDK | OpenWrap SDK Event Handler |     GAM SDK     |
 | :------- | :----------: | :------------------------: | :-------------: |
@@ -43,7 +44,7 @@ GAM Sample app demonstrates the delivery of ads using OpenWrap SDK via GAM Heade
 | iOS      |    3.3.0     |           4.0.0            | 8.12.0 - 10.5.0 |
 
 > Note: Application is tested on Xcode 14.*
-## How to Run
+## How to run
 
 #### Clone the repo & follow the below steps:
 - Install the dependencies
@@ -80,26 +81,26 @@ npm install
     -  GAM Ad Unit Id
     -  GAM Application Id
 
-## Getting Started Android
+## Getting started Android
 
 ### Integrate OpenWrap SDK
-Refer [Integrate OpenWrap SDK](https://community.pubmatic.com/display/ADFP#GetstartedwithAndroidOpenWrapSDKforGAM-IntegrateOpenWrapSDK) for integrating OpenWrap SDK.
+Refer to [Integrate OpenWrap SDK](https://community.pubmatic.com/display/ADFP#GetstartedwithAndroidOpenWrapSDKforGAM-IntegrateOpenWrapSDK) for integrating OpenWrap SDK.
 
 ### Integrate the Google Mobile Ads SDK (GAM)
-Refer [Integrate the Google Mobile Ads SDK (GAM)](https://community.pubmatic.com/display/ADFP#GetstartedwithAndroidOpenWrapSDKforGAM-IntegratetheGoogleMobileAdsSDK(GAM)) for integrating GAM SDK.
+Refer to [Integrate the Google Mobile Ads SDK (GAM)](https://community.pubmatic.com/display/ADFP#GetstartedwithAndroidOpenWrapSDKforGAM-IntegratetheGoogleMobileAdsSDK(GAM)) for integrating GAM SDK.
 
-## Getting Started iOS
+## Getting started iOS
 
 ### Integrate OpenWrap SDK
-Refer [Integrate OpenWrap SDK](https://community.pubmatic.com/display/IDFP#GetstartedwithiOSOpenWrapSDKforGAM-IntegrateOpenWrapSDK) for integrating OpenWrap SDK.
+Refer to [Integrate OpenWrap SDK](https://community.pubmatic.com/display/IDFP#GetstartedwithiOSOpenWrapSDKforGAM-IntegrateOpenWrapSDK) for integrating OpenWrap SDK.
 
 ### Integrate the Google Mobile Ads SDK (GAM)
-Refer [Integrate the Google Mobile Ads SDK (GAM)](https://community.pubmatic.com/display/IDFP#GetstartedwithiOSOpenWrapSDKforGAM-IntegrateGoogleMobileAdsSDK(GAM)) for integrating GAM SDK.
+Refer to [Integrate the Google Mobile Ads SDK (GAM)](https://community.pubmatic.com/display/IDFP#GetstartedwithiOSOpenWrapSDKforGAM-IntegrateGoogleMobileAdsSDK(GAM)) for integrating GAM SDK.
 
 ## Mandatory global configuration
-Refer `Mandatory global configuration`([Android](https://community.pubmatic.com/display/AOPO/Show+banner+ads#Showbannerads-Mandatoryglobalconfiguration)/[iOS](https://community.pubmatic.com/display/IOPO/Show+banner+ads#Showbannerads-Mandatoryglobalconfiguration)) section for setting your application's store URL in your `MainApplication/AppDelegate` files.
+Refer to `Mandatory global configuration`([Android](https://community.pubmatic.com/display/AOPO/Show+banner+ads#Showbannerads-Mandatoryglobalconfiguration)/[iOS](https://community.pubmatic.com/display/IOPO/Show+banner+ads#Showbannerads-Mandatoryglobalconfiguration)) section for setting your application's store URL in your `MainApplication/AppDelegate` files.
 
-## Show Banner Ads
+## Show banner ads
 #### Step 1: Android/iOS specific implementation
   1. Add the `POBRNBannerView`([Android](android/app/src/main/java/com/pubmatic/sampleapp/banner/POBRNBannerView.kt)/[iOS](ios/GAMSampleApp/HeaderBidding/Banner/POBRNBannerView.m)) class to your project's platform-specific source directories.
      - Used to request banner ads from OW SDK using GAM header bidding.
@@ -122,7 +123,7 @@ Refer `Mandatory global configuration`([Android](https://community.pubmatic.com/
      -  Once the component is mounted in the hierarchy POBBannerView internally calls `loadAd()` and adds the view to the hierarchy after loading.
   -  Refer to the [`BannerScreen.tsx`](src/screens/BannerScreen.tsx) screen to understand the use of the [`POBBannerView.tsx`](src/ads/POBBannerView.tsx) component to request banner ads.
 
-## Show Interstitial Ads
+## Show interstitial ads
 #### Step1: Android/iOS specific implementation
   1. Add the `POBRNInterstitialAd`([Android](android/app/src/main/java/com/pubmatic/sampleapp/interstitial/POBRNInterstitialAd.kt)/[iOS](ios/GAMSampleApp/HeaderBidding/Interstitial/POBRNInterstitial.m)) class to your project's platform-specific source directories as described in the sample app.    
      -  Used to request interstitial ads from OW SDK using GAM header bidding.
@@ -144,7 +145,7 @@ Refer `Mandatory global configuration`([Android](https://community.pubmatic.com/
      -  Call `showAd()` to display the ad to the user.
   -  Refer to the [`InterstitialScreen.tsx`](src/screens/InterstitialScreen.tsx) screen to understand the use of the [`POBInterstitial.ts`](src/ads/POBInterstitial.ts) class to request interstitial ads.
 
-## Show Rewarded Ads
+## Show rewarded ads
 #### Step 1: Android/iOS specific implementation
   1. Add the `POBRNRewardedAd`([Android](android/app/src/main/java/com/pubmatic/sampleapp/rewarded/POBRNRewardedAd.kt)/[iOS](ios/GAMSampleApp/HeaderBidding/RewardedAd/POBRNRewardedAd.m)) class to your project's platform-specific source directories.
      -  Used to request interstitial ads from OW SDK using GAM header bidding.
@@ -182,7 +183,7 @@ Before releasing your ad-enabled app into the world, you must first test that yo
 ### Enable SDK logs
 Use OpenWrap SDK logs to troubleshoot issues and confirm everything is working as expected during debugging. Refer `Enable SDK logs`([Android](https://community.pubmatic.com/display/AOPO/Test+and+debug+your+integration#Testanddebugyourintegration-EnableSDKlogs)/[iOS](https://community.pubmatic.com/display/IOPO/Test+and+debug+your+integration#Testanddebugyourintegration-EnableSDKlogs)) section for enabling SDK logs. Add the given code to your app's `MainApplication.kt/AppDelegate.m` file.
 
-### Advanced Topics
+### Advanced topics
 
 OpenWrap SDK provides various fields and methods to pass information to PubMatic like demographics, compliance policies for COPPA or GDPR, etc. The following links cover a wide range of topics relevant to mediation adapter integration:
 
@@ -201,3 +202,6 @@ OpenWrap SDK provides various fields and methods to pass information to PubMatic
 
 ## Support
 You will need a PubMatic account to enable the ads. Please contact your [account manager](https://pubmatic.com/contact-us/).
+
+## License
+- See [LICENSE](LICENSE) file.
