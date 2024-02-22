@@ -1,5 +1,6 @@
 #import "OpenWrapSDKModuleHelper.h"
-#import "POBConstants.h"
+#import "POBRNConstants.h"
+#import <React/RCTLog.h>
 
 @implementation OpenWrapSDKModuleHelper
 
@@ -8,25 +9,25 @@
  */
 + (POBSDKLogLevel)pobSDKLogLevel:(NSInteger)logLevel {
     switch (logLevel) {
-        case POB_LogLevel_ALL:
+        case POBRN_LogLevel_ALL:
             return POBSDKLogLevelAll;
             break;
-        case POB_LogLevel_VERBOSE:
+        case POBRN_LogLevel_VERBOSE:
             return POBSDKLogLevelVerbose;
             break;
-        case POB_LogLevel_DEBUG:
+        case POBRN_LogLevel_DEBUG:
             return POBSDKLogLevelDebug;
             break;
-        case POB_LogLevel_INFO:
+        case POBRN_LogLevel_INFO:
             return POBSDKLogLevelInfo;
             break;
-        case POB_LogLevel_WARN:
+        case POBRN_LogLevel_WARN:
             return POBSDKLogLevelWarning;
             break;
-        case POB_LogLevel_ERROR:
+        case POBRN_LogLevel_ERROR:
             return POBSDKLogLevelError;
             break;
-        case POB_LogLevel_OFF:
+        case POBRN_LogLevel_OFF:
             return POBSDKLogLevelOff;
             break;
         default:
@@ -43,21 +44,29 @@
     POBApplicationInfo * appInfo = nil;
     if (dictionary != nil) {
         appInfo = [POBApplicationInfo new];
-        appInfo.domain = dictionary[POB_APP_DOMAIN];
-        appInfo.storeURL = [NSURL URLWithString:dictionary[POB_STORE_URL]];
-        NSInteger isPaid = (NSInteger)dictionary[POB_IS_PAID];
-        appInfo.paid = [self pobBool:isPaid];
-        appInfo.categories = dictionary[POB_CATEGORIES];
-        appInfo.keywords = dictionary[POB_KEYWORDS];
+        appInfo.domain = dictionary[POBRN_APP_DOMAIN];
+        NSString *parsedStoreUrl = [self removeTrailingSlashsIfNeeded:dictionary[POBRN_STORE_URL]];
+        appInfo.storeURL = [NSURL URLWithString:parsedStoreUrl];
+        NSNumber *isPaidValue = [dictionary objectForKey:POBRN_IS_PAID];
+        if (isPaidValue != nil && [isPaidValue isKindOfClass:[NSNumber class]]) {
+            BOOL isPaid = [isPaidValue boolValue];
+            appInfo.paid = isPaid ? POBBOOLYes : POBBOOLNo;
+        }
+        appInfo.categories = dictionary[POBRN_CATEGORIES];
+        appInfo.keywords = dictionary[POBRN_KEYWORDS];
     }
     return appInfo;
 }
 
-+ (POBBOOL)pobBool:(NSInteger)isPaid {
-    if (isPaid == 0) {
-        return POBBOOLNo;
+/*!
+ @abstract Removes the trailing "/" from the string passed
+ */
++ (NSString *)removeTrailingSlashsIfNeeded:(NSString *)inputString {
+    // Iterate till the inputString has "/" as a suffix.
+    while ([inputString hasSuffix:@"/"]) {
+        inputString = [inputString substringToIndex:[inputString length] - 1];
     }
-    return POBBOOLYes;
+    return inputString;
 }
 
 /*!
@@ -68,15 +77,19 @@
     POBUserInfo * usrInfo = nil;
     if (dictionary != nil) {
         usrInfo = [POBUserInfo new];
-        usrInfo.metro = dictionary[POB_METRO];
-        usrInfo.city = dictionary[POB_CITY];
-        usrInfo.region = dictionary[POB_REGION];
-        usrInfo.country = dictionary[POB_COUNTRY];
-        usrInfo.zip = dictionary[POB_ZIP];
-        usrInfo.keywords = dictionary[POB_KEYWORDS];
-        NSInteger birth = [dictionary[POB_BIRTH_YEAR] integerValue];
-        usrInfo.birthYear = [NSNumber numberWithInteger:birth];
-        usrInfo.gender = [dictionary[POB_GENDER] integerValue];
+        usrInfo.metro = dictionary[POBRN_METRO];
+        usrInfo.city = dictionary[POBRN_CITY];
+        usrInfo.region = dictionary[POBRN_REGION];
+        usrInfo.zip = dictionary[POBRN_ZIP];
+        usrInfo.keywords = dictionary[POBRN_KEYWORDS];
+        NSNumber *birthYear = dictionary[POBRN_BIRTH_YEAR];
+        if (birthYear) {
+            usrInfo.birthYear = birthYear;
+        }
+        NSNumber *gender = dictionary[POBRN_GENDER];
+        if (gender) {
+            usrInfo.gender =  [gender integerValue];
+        }
     }
     return usrInfo;
 }
@@ -88,8 +101,8 @@
     NSDictionary *dictionary = [self convertJsonStringToJSON:location];
     CLLocation *loc;
     if (dictionary != nil) {
-        double lat = [dictionary[POB_LATITUDE] doubleValue];
-        double lon = [dictionary[POB_LONGITUDE] doubleValue];
+        double lat = [dictionary[POBRN_LATITUDE] doubleValue];
+        double lon = [dictionary[POBRN_LONGITUDE] doubleValue];
         loc = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
     }
     return loc;
@@ -101,8 +114,8 @@
 + (POBLocSource)parseSourceFromJsonString:(NSString *)source {
     NSDictionary *dictionary = [self convertJsonStringToJSON:source];
     POBLocSource src = POBLocSourceGPS;
-    if (dictionary[POB_SOURCE] != nil) {
-        src = [dictionary[POB_SOURCE] integerValue];
+    if (dictionary[POBRN_SOURCE] != nil) {
+        src = [dictionary[POBRN_SOURCE] integerValue];
     }
     return src;
 }
@@ -116,7 +129,7 @@
     @try {
         jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
     } @catch (NSException *exception) {
-      NSLog(@"JSON Serialization Failed: %@", exception.reason);
+        RCTLogAdvice(@"JSON Serialization Failed: %@", exception.reason);
     }
     return jsonDict;
 }

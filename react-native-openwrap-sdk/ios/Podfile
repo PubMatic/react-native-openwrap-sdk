@@ -5,7 +5,7 @@ target 'PubmaticOpenwrapSdk' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'OpenWrapSDK'
-  # Pods for PubmaticOpenwrapSdk
+  # Pods for PubMaticOpenWrapSDK
+  pod 'OpenWrapSDK', '>=3.4.0'
 
 end

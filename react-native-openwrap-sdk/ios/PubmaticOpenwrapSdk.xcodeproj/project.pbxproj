@@ -20,11 +20,33 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libPubmaticOpenwrapSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPubmaticOpenwrapSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		41170BE72ACC860300AFC9CD /* POBRNAdHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNAdHelper.h; sourceTree = "<group>"; };
+		41170BE82ACC860300AFC9CD /* POBRNAdHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNAdHelper.m; sourceTree = "<group>"; };
+		413E5ABC2AF0FFE4001772F3 /* POBRNInterstitial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNInterstitial.h; sourceTree = "<group>"; };
+		413E5ABD2AF0FFE4001772F3 /* POBRNInterstitial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNInterstitial.m; sourceTree = "<group>"; };
+		41AC63FA2AE256F60044ECB2 /* POBRNRewardedAdModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNRewardedAdModule.h; sourceTree = "<group>"; };
+		41AC63FB2AE256F60044ECB2 /* POBRNRewardedAdModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNRewardedAdModule.m; sourceTree = "<group>"; };
+		41AC63FD2AE274750044ECB2 /* POBRNFullScreenAdManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNFullScreenAdManager.h; sourceTree = "<group>"; };
+		41AC63FE2AE274750044ECB2 /* POBRNFullScreenAdManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNFullScreenAdManager.m; sourceTree = "<group>"; };
+		41AC64042AE27FB00044ECB2 /* POBRNEventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNEventEmitter.h; sourceTree = "<group>"; };
+		41AC64052AE27FB00044ECB2 /* POBRNEventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNEventEmitter.m; sourceTree = "<group>"; };
+		41AC64092AE2B4EC0044ECB2 /* POBRNRewardedAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNRewardedAd.h; sourceTree = "<group>"; };
+		41AC640A2AE2B4EC0044ECB2 /* POBRNRewardedAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNRewardedAd.m; sourceTree = "<group>"; };
+		41AC640C2AE2BDAB0044ECB2 /* POBRNFullScreenAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNFullScreenAd.h; sourceTree = "<group>"; };
+		41B3CF692AC43CD400573579 /* POBRNInterstitialModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNInterstitialModule.h; sourceTree = "<group>"; };
+		41B3CF6A2AC43CD400573579 /* POBRNInterstitialModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNInterstitialModule.m; sourceTree = "<group>"; };
+		41BBCF4E2ADC5F83006AA1E9 /* POBRNBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNBannerView.h; sourceTree = "<group>"; };
+		41BBCF4F2ADC5F83006AA1E9 /* POBRNBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNBannerView.m; sourceTree = "<group>"; };
+		41BBCF532ADC6144006AA1E9 /* POBRNBannerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNBannerViewManager.h; sourceTree = "<group>"; };
+		41BBCF542ADC6144006AA1E9 /* POBRNBannerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBRNBannerViewManager.m; sourceTree = "<group>"; };
+		41BBCF592ADCA779006AA1E9 /* POBAdUnitDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBAdUnitDetails.h; sourceTree = "<group>"; };
+		41BBCF5A2ADCA779006AA1E9 /* POBAdUnitDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POBAdUnitDetails.m; sourceTree = "<group>"; };
+		41F1CBE02ACD93C500BBAD03 /* POBRNFullScreenAdProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNFullScreenAdProvider.h; sourceTree = "<group>"; };
 		E29293832A5C1FC700D301C2 /* OpenWrapSDKModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenWrapSDKModule.h; sourceTree = "<group>"; };
 		E29293842A5C1FC700D301C2 /* OpenWrapSDKModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenWrapSDKModule.m; sourceTree = "<group>"; };
 		E29293852A5C1FE300D301C2 /* OpenWrapSDKModuleHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenWrapSDKModuleHelper.h; sourceTree = "<group>"; };
 		E29293862A5C1FE300D301C2 /* OpenWrapSDKModuleHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenWrapSDKModuleHelper.m; sourceTree = "<group>"; };
-		E29293872A5C1FF900D301C2 /* POBConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBConstants.h; sourceTree = "<group>"; };
+		E29293872A5C1FF900D301C2 /* POBRNConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POBRNConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,16 +68,86 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4129C8D02ADE5FBA0035E41F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41BBCF592ADCA779006AA1E9 /* POBAdUnitDetails.h */,
+				41BBCF5A2ADCA779006AA1E9 /* POBAdUnitDetails.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		413E5ABB2AF0FF9E001772F3 /* Interstitial */ = {
+			isa = PBXGroup;
+			children = (
+				41B3CF692AC43CD400573579 /* POBRNInterstitialModule.h */,
+				41B3CF6A2AC43CD400573579 /* POBRNInterstitialModule.m */,
+				413E5ABC2AF0FFE4001772F3 /* POBRNInterstitial.h */,
+				413E5ABD2AF0FFE4001772F3 /* POBRNInterstitial.m */,
+			);
+			path = Interstitial;
+			sourceTree = "<group>";
+		};
+		41AC63F92AE2569C0044ECB2 /* RewardedAd */ = {
+			isa = PBXGroup;
+			children = (
+				41AC63FA2AE256F60044ECB2 /* POBRNRewardedAdModule.h */,
+				41AC63FB2AE256F60044ECB2 /* POBRNRewardedAdModule.m */,
+				41AC64092AE2B4EC0044ECB2 /* POBRNRewardedAd.h */,
+				41AC640A2AE2B4EC0044ECB2 /* POBRNRewardedAd.m */,
+			);
+			path = RewardedAd;
+			sourceTree = "<group>";
+		};
+		41AC64002AE27D490044ECB2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				41AC64042AE27FB00044ECB2 /* POBRNEventEmitter.h */,
+				41AC64052AE27FB00044ECB2 /* POBRNEventEmitter.m */,
+				41AC63FD2AE274750044ECB2 /* POBRNFullScreenAdManager.h */,
+				41AC63FE2AE274750044ECB2 /* POBRNFullScreenAdManager.m */,
+				41B44EED2AE7B622000EB5BF /* Protocol */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		41B44EED2AE7B622000EB5BF /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				41F1CBE02ACD93C500BBAD03 /* POBRNFullScreenAdProvider.h */,
+				41AC640C2AE2BDAB0044ECB2 /* POBRNFullScreenAd.h */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		41BBCF522ADC5FB0006AA1E9 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				41BBCF4E2ADC5F83006AA1E9 /* POBRNBannerView.h */,
+				41BBCF4F2ADC5F83006AA1E9 /* POBRNBannerView.m */,
+				41BBCF532ADC6144006AA1E9 /* POBRNBannerViewManager.h */,
+				41BBCF542ADC6144006AA1E9 /* POBRNBannerViewManager.m */,
+			);
+			path = Banner;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				E29293872A5C1FF900D301C2 /* POBConstants.h */,
-				E29293852A5C1FE300D301C2 /* OpenWrapSDKModuleHelper.h */,
+				413E5ABB2AF0FF9E001772F3 /* Interstitial */,
+				41AC64002AE27D490044ECB2 /* Common */,
+				41AC63F92AE2569C0044ECB2 /* RewardedAd */,
+				41BBCF522ADC5FB0006AA1E9 /* Banner */,
+				4129C8D02ADE5FBA0035E41F /* Models */,
+				41170BE72ACC860300AFC9CD /* POBRNAdHelper.h */,
+				41170BE82ACC860300AFC9CD /* POBRNAdHelper.m */,
+				E29293872A5C1FF900D301C2 /* POBRNConstants.h */,
 				E29293862A5C1FE300D301C2 /* OpenWrapSDKModuleHelper.m */,
 				E29293832A5C1FC700D301C2 /* OpenWrapSDKModule.h */,
 				E29293842A5C1FC700D301C2 /* OpenWrapSDKModule.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
-			);
+				E29293852A5C1FE300D301C2 /* OpenWrapSDKModuleHelper.h */,
+            );
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

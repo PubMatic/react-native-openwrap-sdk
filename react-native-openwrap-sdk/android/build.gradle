@@ -76,6 +76,7 @@ rootProject.allprojects {
     maven {
       url 'https://repo.pubmatic.com/artifactory/public-repos'
     }
+    jcenter()
   }
 }
 
@@ -87,13 +88,21 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
   // Include PubMatic OpenWrap SDK
-  implementation "com.pubmatic.sdk:openwrap:3.1.0"
+  implementation "com.pubmatic.sdk:openwrap:3.4.0"
+
+  // Include play services Android Advertising Id client library
+  implementation "com.google.android.gms:play-services-ads-identifier:18.0.1"
 
   // Test implementation
   testImplementation 'junit:junit:4.13.2'
   testImplementation 'org.mockito:mockito-core:4.0.0'
   testImplementation 'org.json:json:20180813'
+  testImplementation 'org.mockito:mockito-inline:2.13.0'
+  testImplementation 'org.robolectric:robolectric:4.3.1'
+  testImplementation 'org.apache.httpcomponents:httpclient:4.5.6'
+
 }
 
 if (isNewArchitectureEnabled()) {

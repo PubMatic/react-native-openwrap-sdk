@@ -1,54 +1,105 @@
-import * as React from 'react';
-
-import { StyleSheet, View, Text, Platform } from 'react-native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  checkMultiple,
+  Permission,
+  requestMultiple,
+} from 'react-native-permissions';
 import {
   OpenWrapSDK,
+  POBApplicationInfo,
   POBLocation,
   POBUserInfo,
-  POBApplicationInfo,
 } from 'react-native-openwrap-sdk';
 
-export default function App() {
-  React.useEffect(() => {
-    // Fetch OpenWrap SDK version and print it over console
+import HomeScreen from './HomeScreen';
+import BannerScreen from './screens/primary-ad-sdk/BannerScreen';
+import MRECDisplayScreen from './screens/primary-ad-sdk/MRECDisplayScreen';
+import MRECVideoScreen from './screens/primary-ad-sdk/MRECVideoScreen';
+import InterstitialDisplayScreen from './screens/primary-ad-sdk/InterstitialDisplayScreen';
+import InterstitialVideoScreen from './screens/primary-ad-sdk/InterstitialVideoScreen';
+import RewardedScreen from './screens/primary-ad-sdk/RewardedScreen';
+import BannerListScreen from './screens/primary-ad-sdk/BannerListScreen';
+import Constants from './Constants';
+import InHouseMediationBannerScreen from './screens/in-house-mediation/InHouseMediationBannerScreen';
+import InHouseMediationInterstitialScreen from './screens/in-house-mediation/InHouseMediationInterstitialScreen';
+import InHouseMediationRewardedScreen from './screens/in-house-mediation/InHouseMediationRewardedScreen';
+import { Platform } from 'react-native';
+
+// Creating navigation stack.
+const Stack = createNativeStackNavigator();
+
+/**
+ * Registers all the screens and navigate be default to Home Screen.
+ */
+const MainScreen = () => {
+  useEffect(() => {
+    // Checking for the permissions and askig if not granted.
+    checkMultiple(Constants.PERMISSIONS).then((value) => {
+      let deniedPermissions: Permission[] = [];
+      Constants.PERMISSIONS.forEach((permission) => {
+        if (value[permission] === 'denied') {
+          deniedPermissions.push(permission);
+        }
+      });
+      if (deniedPermissions.length !== 0) {
+        requestMultiple(deniedPermissions);
+      }
+    });
+
+    // Set the required and optional global parameters.
+    setGlobalParams();
+  }, []);
+
+  /**
+   * Used to set the required and optional parameters on OpenWrapSDK.
+   */
+  const setGlobalParams = () => {
+    // Optional - Fetch OpenWrap SDK version and print it over console
     console.log(`SDK version ${OpenWrapSDK.getVersion()}`);
 
-    // Set the OpenWrap SDK log level to all
-    OpenWrapSDK.setLogLevel(OpenWrapSDK.LogLevel.All);
+    // Optional - Set the OpenWrap SDK log level to all
+    if (__DEV__) {
+      OpenWrapSDK.setLogLevel(OpenWrapSDK.LogLevel.All);
+    }
 
-    // Set the User Info to OpenWrap SDK
+    // Optional - Set the User Info to OpenWrap SDK
     var userInfo: POBUserInfo = new POBUserInfo();
-    // Country code using ISO-3166-1-alpha-3.
-    userInfo.setCountry('USA');
 
-    // Region code using ISO-3166-2; 2-letter state code if USA.
+    // Optional - Region code using ISO-3166-2; 2-letter state code if USA.
     userInfo.setRegion('NY');
 
-    // User city
+    // Optional - User city
     userInfo.setCity('Rochester');
 
-    // Designated market area (DMA) code of the user. This field is applicable for US users only.
+    // Optional - Designated market area (DMA) code of the user. This field is applicable for US users only.
     userInfo.setMetro('734');
 
-    // Home zip code for the U.S.; otherwise it indicates the postal code
+    // Optional - Home zip code for the U.S.; otherwise it indicates the postal code
     userInfo.setZip('14602');
 
-    // Birth year in YYYY format.
+    // Optional - Birth year in YYYY format.
     userInfo.setBirthYear(1990);
 
-    // User gender
+    // Optional - User gender
     userInfo.setGender(POBUserInfo.Gender.FEMALE);
 
-    // Comma-delimited list of keywords indicating the consumer's interests or intent
+    // Optional - Comma-delimited list of keywords indicating the consumer's interests or intent
     userInfo.setKeywords('sports, football, soccer');
+
+    // Optional - Set the User Info to OpenWrap SDK
     OpenWrapSDK.setUserInfo(userInfo);
 
-    // Set the Application Info to OpenWrap SDK
+    // Optional - Set the Application Info to OpenWrap SDK
     var appInfo: POBApplicationInfo = new POBApplicationInfo();
-    appInfo.setKeywords('keywords');
-    // A valid Play Store Url of an Android app. Required.
 
-    // Required.
+    // Optional - Set Application Keywords.
+    appInfo.setKeywords('keywords');
+
+    // Required - A valid Google Play Store Url of an Android app or App Store Url for an iOS app.
+    // This app information is a global configuration & you need not set this for
+    // every ad request(of any ad type).
     if (Platform.OS === 'ios') {
       // Apple's app store URL
       appInfo.setStoreURL(
@@ -60,64 +111,98 @@ export default function App() {
         new URL('https://play.google.com/store/apps/details?id=com.example.app')
       );
     }
-    // If the site/app falls under multiple IAB categories, you can send categories separated by comma.
+    // Optional - If the site/app falls under multiple IAB categories, you can send categories separated by comma.
     appInfo.setCategories('IAB-1,IAB-5,IAB1-6');
 
-    // App Domain
+    // Optional - App Domain
     appInfo.setDomain('https://www.yourappdomain.com');
+
+    // Optional - App is paid or free.
     appInfo.setPaid(true);
 
-    //Comma delimited list of keywords about the app.
+    // Optional - Comma delimited list of keywords about the app.
     appInfo.setKeywords('medicine, drugs, pharmaceutical');
+
+    // Optional - Set the Application Info to OpenWrap SDK
     OpenWrapSDK.setApplicationInfo(appInfo);
 
-    // Disable the location access
-    OpenWrapSDK.allowLocationAccess(false);
+    // Optional - Disable the location access
+    // OpenWrapSDK.allowLocationAccess(false);
 
-    // Set the Location Coordinates explicitly and set the Location Source as GPS
-    OpenWrapSDK.setLocation(
-      new POBLocation(POBLocation.Source.GPS, 41.906365, -75.327759)
-    );
+    // Optional - Set the Location Coordinates explicitly and set the Location Source as GPS
+    // OpenWrapSDK.setLocation(
+    //   new POBLocation(POBLocation.Source.GPS, 41.906365, -75.327759)
+    // );
 
-    // Set the CCPA string, compliant with the IAB Specification.
-    // Ref - https://github.com/InteractiveAdvertisingBureau/USPrivacy/blob/master/CCPA/US%20Privacy%20String.md
-    OpenWrapSDK.setCCPA('<#CCPAString#>');
+    // Optional - Indicates that the user should be served only COPPA-compliant ads.
+    // OpenWrapSDK.setCoppa(true);
 
-    // Indicates that the user should be served only COPPA-compliant ads.
-    OpenWrapSDK.setCoppa(true);
+    // Optional - Disable SSL
+    // OpenWrapSDK.setSSLEnabled(false);
 
-    // Disable SSL
-    OpenWrapSDK.setSSLEnabled(false);
+    // Optional - Use Internal Browser
+    // OpenWrapSDK.setUseInternalBrowser(true);
 
-    // Use Internal Browser
-    OpenWrapSDK.setUseInternalBrowser(true);
-
-    // Indicates whether or not the ad request is GDPR (General Data Protection Regulation) compliant.
-    OpenWrapSDK.setGDPREnabled(true);
-
-    // A valid Base64 encoded consent string as defined at, https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework.
-    OpenWrapSDK.setGDPRConsent('<#Base64ConsentString#>');
-
-    // Disable use of advertising Id
-    OpenWrapSDK.allowAdvertisingId(false);
-  }, []);
+    // Optional - Disable use of advertising Id
+    // OpenWrapSDK.allowAdvertisingId(false);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>OpenWrap SDK Version: {OpenWrapSDK.getVersion()}</Text>
-    </View>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: { backgroundColor: '#3397D7' },
+            headerTitleStyle: {
+              fontWeight: 'normal',
+              fontSize: 20,
+            },
+          }}
+        >
+          <Stack.Screen name="Home">{() => <HomeScreen />}</Stack.Screen>
+          <Stack.Screen name="Primary Ad SDK Banner" component={BannerScreen} />
+          <Stack.Screen
+            name="Primary Ad SDK MREC Display"
+            component={MRECDisplayScreen}
+          />
+          <Stack.Screen
+            name="Primary Ad SDK MREC Video"
+            component={MRECVideoScreen}
+          />
+          <Stack.Screen
+            name="Primary Ad SDK Interstitial Display"
+            component={InterstitialDisplayScreen}
+          />
+          <Stack.Screen
+            name="Primary Ad SDK Interstitial Video"
+            component={InterstitialVideoScreen}
+          />
+          <Stack.Screen
+            name="Primary Ad SDK Rewarded"
+            component={RewardedScreen}
+          />
+          <Stack.Screen
+            name="Primary Ad SDK Banner List"
+            component={BannerListScreen}
+          />
+          <Stack.Screen
+            name="In House Mediation Banner"
+            component={InHouseMediationBannerScreen}
+          />
+          <Stack.Screen
+            name="In House Mediation Interstitial"
+            component={InHouseMediationInterstitialScreen}
+          />
+          <Stack.Screen
+            name="In House Mediation Rewarded"
+            component={InHouseMediationRewardedScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+export default MainScreen;

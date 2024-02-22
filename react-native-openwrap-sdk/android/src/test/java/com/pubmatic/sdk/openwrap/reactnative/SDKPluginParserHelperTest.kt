@@ -21,7 +21,7 @@ class SDKPluginParserHelperTest {
                 " \"paid\": true,\n" +
                 " \"keywords\": \"android, app\"\n" +
                 "}";
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertEquals("example.com", applicationInfo.domain)
         Assert.assertEquals(URL("https://example.com/app"), applicationInfo.storeURL)
         Assert.assertEquals("android, app", applicationInfo.keywords)
@@ -35,7 +35,7 @@ class SDKPluginParserHelperTest {
                 " \"paid\": true,\n" +
                 " \"keywords\": \"android, app\"\n" +
                 "}";
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertNull(applicationInfo.domain)
         Assert.assertEquals(URL("https://example.com/app"), applicationInfo.storeURL)
         Assert.assertEquals("android, app", applicationInfo.keywords)
@@ -49,7 +49,7 @@ class SDKPluginParserHelperTest {
                 " \"paid\": true,\n" +
                 " \"keywords\": \"android, app\"\n" +
                 "}";
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertEquals("example.com", applicationInfo.domain)
         Assert.assertNull(applicationInfo.storeURL)
         Assert.assertEquals("android, app", applicationInfo.keywords)
@@ -63,7 +63,7 @@ class SDKPluginParserHelperTest {
                 " \"paid\": \"https://example.com/app\",\n" +
                 " \"keywords\": \"android, app\"\n" +
                 "}";
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertEquals("example.com", applicationInfo.domain)
         Assert.assertEquals("android, app", applicationInfo.keywords)
         Assert.assertNull(applicationInfo.isPaid)
@@ -77,7 +77,7 @@ class SDKPluginParserHelperTest {
                 " \"storeUrl\": \"https://example.com/app\",\n" +
                 " \"paid\": true,\n" +
                 "}";
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertEquals("example.com", applicationInfo.domain)
         Assert.assertEquals(URL("https://example.com/app"), applicationInfo.storeURL)
         Assert.assertNull(applicationInfo.keywords)
@@ -86,21 +86,21 @@ class SDKPluginParserHelperTest {
 
     @Test
     fun testParseLogLevel(){
-        var logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Debug.level)
+        var logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Debug.level)
         Assert.assertEquals(LogLevel.Debug, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Info.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Info.level)
         Assert.assertEquals(LogLevel.Info, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Verbose.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Verbose.level)
         Assert.assertEquals(LogLevel.Verbose, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Warn.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Warn.level)
         Assert.assertEquals(LogLevel.Warn, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Error.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Error.level)
         Assert.assertEquals(LogLevel.Error, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.Off.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.Off.level)
         Assert.assertEquals(LogLevel.Off, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(LogLevel.All.level)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(LogLevel.All.level)
         Assert.assertEquals(LogLevel.All, logLevel)
-        logLevel = SDKPluginParserHelper.parseLogLevel(-1)
+        logLevel = POBSDKPluginParserHelper.parseLogLevel(-1)
         Assert.assertNull(logLevel)
     }
 
@@ -111,7 +111,7 @@ class SDKPluginParserHelperTest {
                 " \"longitude\": 1.5,\n" +
                 " \"source\": 1,\n" +
                 "}";
-        val location = SDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
+        val location = POBSDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
         Assert.assertEquals(1.2 , location.latitude, 1.0)
         Assert.assertEquals(1.5, location.longitude, 1.0)
         Assert.assertEquals(POBLocation.Source.GPS, location.source)
@@ -124,7 +124,7 @@ class SDKPluginParserHelperTest {
                 " \"longitude\": 1.5,\n" +
                 " \"source\": 2,\n" +
                 "}";
-        val location = SDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
+        val location = POBSDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
         Assert.assertEquals(1.2 , location.latitude, 1.0)
         Assert.assertEquals(1.5, location.longitude, 1.0)
         Assert.assertEquals(POBLocation.Source.IP_ADDRESS, location.source)
@@ -137,7 +137,7 @@ class SDKPluginParserHelperTest {
                 " \"longitude\": 1.5,\n" +
                 " \"source\": 3,\n" +
                 "}"
-        val location = SDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
+        val location = POBSDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
         Assert.assertEquals(1.2 , location.latitude, 1.0)
         Assert.assertEquals(1.5, location.longitude, 1.0)
         Assert.assertEquals(POBLocation.Source.USER, location.source)
@@ -151,7 +151,7 @@ class SDKPluginParserHelperTest {
                     " \"longitude\": 1.5,\n" +
                     " \"source\": -1,\n" +
                     "}";
-            SDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
+            POBSDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
         }catch (exception: JSONException){
             Assert.assertTrue(true)
         }
@@ -162,7 +162,6 @@ class SDKPluginParserHelperTest {
         val userJsonStr = "{\n" +
                 " \"city\": \"Pune\",\n" +
                 " \"birthYear\": 1990,\n" +
-                " \"country\": \"India\",\n" +
                 " \"metro\": \"Pune\",\n" +
                 " \"region\": \"MH\",\n" +
                 " \"zip\": \"411045\",\n" +
@@ -170,10 +169,9 @@ class SDKPluginParserHelperTest {
                 " \"keywords\": \"android, app\"\n" +
                 "}";
         System.out.println(userJsonStr)
-        val userInfo = SDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
+        val userInfo = POBSDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
         Assert.assertEquals("Pune", userInfo.city)
         Assert.assertEquals(1990, userInfo.birthYear)
-        Assert.assertEquals("India", userInfo.country)
         Assert.assertEquals("Pune", userInfo.metro)
         Assert.assertEquals("411045", userInfo.zip)
         Assert.assertEquals(POBUserInfo.Gender.OTHER, userInfo.gender)
@@ -184,10 +182,9 @@ class SDKPluginParserHelperTest {
     fun testParseJsonToUserInfoInvalidData(){
         val userJsonStr = "{\n" +
                 "}";
-        val userInfo = SDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
+        val userInfo = POBSDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
         Assert.assertNull(userInfo.city)
         Assert.assertEquals(0, userInfo.birthYear)
-        Assert.assertNull(userInfo.country)
         Assert.assertNull(userInfo.metro)
         Assert.assertNull(userInfo.zip)
         Assert.assertNull(userInfo.gender)
@@ -199,7 +196,7 @@ class SDKPluginParserHelperTest {
         val userJsonStr = "{\n" +
                 " \"gender\": 1,\n" +
                 "}";
-        val userInfo = SDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
+        val userInfo = POBSDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
         Assert.assertEquals(POBUserInfo.Gender.MALE, userInfo.gender)
     }
 
@@ -208,7 +205,7 @@ class SDKPluginParserHelperTest {
         val userJsonStr = "{\n" +
                 " \"gender\": 2,\n" +
                 "}";
-        val userInfo = SDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
+        val userInfo = POBSDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
         Assert.assertEquals(POBUserInfo.Gender.FEMALE, userInfo.gender)
     }
 

@@ -19,11 +19,6 @@ export class POBUserInfo {
   gender?: POBUserInfo.Gender;
 
   /**
-   * Country code using ISO-3166-1-alpha-3.
-   */
-  country?: string;
-
-  /**
    * City of user
    */
   city?: string;
@@ -82,16 +77,6 @@ export class POBUserInfo {
    */
   public setGender(gender: POBUserInfo.Gender) {
     this.gender = gender;
-  }
-
-  /**
-   * Set the user country. Country code using ISO-3166-1-alpha-3.
-   * For example: for United State Of America, you can use setCountry("USA");
-   *
-   * @param country User's country
-   */
-  public setCountry(country: string) {
-    this.country = country;
   }
 
   /**

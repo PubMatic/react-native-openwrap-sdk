@@ -1,6 +1,6 @@
 {
   "name": "react-native-openwrap-sdk",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "PubMatic OpenWrap SDK React Native Plugin for iOS and Android platform",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -45,13 +45,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/PubMatic/react-native-openwrap-sdk",
+  "repository": "https://github.com/PubMatic/react-native-openwrap-sdk/blob/main/react-native-openwrap-sdk",
   "author": "PubMatic Inc. <sdk-support@pubmatic.com> (https://www.pubmatic.com)",
-  "license": "https://github.com/PubMatic/react-native-openwrap-sdk/blob/main/LICENSE",
+  "license": "https://github.com/PubMatic/react-native-openwrap-sdk/LICENSE",
   "bugs": {
     "url": "https://github.com/PubMatic/react-native-openwrap-sdk/issues"
   },
-  "homepage": "https://github.com/PubMatic/react-native-openwrap-sdk#readme",
+  "homepage": "https://github.com/PubMatic/react-native-openwrap-sdk/blob/main/react-native-openwrap-sdk/README.md",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

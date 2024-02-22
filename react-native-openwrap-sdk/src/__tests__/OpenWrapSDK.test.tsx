@@ -4,10 +4,7 @@ import { POBLocation } from '../models/POBLocation';
 import { POBUserInfo } from '../models/POBUserInfo';
 var actualLogLevel: OpenWrapSDK.LogLevel;
 var actualAllowLocationAccess: Boolean;
-var actualCCPAString: string;
 var actualCoppa: boolean;
-var actualGdprEnabled: boolean;
-var actualGDPRString: string;
 var actualSSLEnabled: boolean;
 var actualUseInternalBrowser: boolean;
 var actualAllowAdvertisingId: boolean;
@@ -21,7 +18,7 @@ jest.mock('react-native', () => {
     NativeModules: {
       OpenWrapSDKModule: {
         getConstants: jest.fn(() => ({
-          ow_sdk_version: '3.1.0',
+          ow_sdk_version: '3.4.0',
         })),
 
         setLogLevel(logLevel: OpenWrapSDK.LogLevel) {
@@ -32,20 +29,8 @@ jest.mock('react-native', () => {
           actualAllowLocationAccess = allowLocationAccess;
         },
 
-        setCCPA(ccpaString: string) {
-          actualCCPAString = ccpaString;
-        },
-
         setCoppa(coppa: boolean) {
           actualCoppa = coppa;
-        },
-
-        setGDPREnabled(gdprEnabled: boolean) {
-          actualGdprEnabled = gdprEnabled;
-        },
-
-        setGDPRConsent(gdprConsentString: string) {
-          actualGDPRString = gdprConsentString;
         },
 
         setSSLEnabled(sslEnabled: boolean) {
@@ -87,7 +72,7 @@ jest.mock('react-native', () => {
 });
 
 test('testSDKVersion', () => {
-  expect(OpenWrapSDK.getVersion()).toBe('3.1.0');
+  expect(OpenWrapSDK.getVersion()).toBe('3.4.0');
 });
 
 test('testLogLevel', () => {
@@ -114,30 +99,11 @@ test('testAllowLocationAccess', () => {
   expect(false).toBe(actualAllowLocationAccess);
 });
 
-test('setCCPA', () => {
-  let expectedCCPA = 'abc';
-  OpenWrapSDK.setCCPA(expectedCCPA);
-  expect(expectedCCPA).toBe(actualCCPAString);
-});
-
 test('setCoppa', () => {
   OpenWrapSDK.setCoppa(false);
   expect(false).toBe(actualCoppa);
   OpenWrapSDK.setCoppa(true);
   expect(true).toBe(actualCoppa);
-});
-
-test('setGDPREnabled', () => {
-  OpenWrapSDK.setGDPREnabled(false);
-  expect(false).toBe(actualGdprEnabled);
-  OpenWrapSDK.setGDPREnabled(true);
-  expect(true).toBe(actualGdprEnabled);
-});
-
-test('setGDPRConsent', () => {
-  let expectedGDPRConsent = 'abc123';
-  OpenWrapSDK.setGDPRConsent(expectedGDPRConsent);
-  expect(expectedGDPRConsent).toBe(actualGDPRString);
 });
 
 test('setSSLEnabled', () => {
@@ -198,7 +164,6 @@ test('setUserInfo', () => {
   userInfo.setKeywords('keywords');
   userInfo.setGender(POBUserInfo.Gender.FEMALE);
   userInfo.setCity('Pune');
-  userInfo.setCountry('India');
   userInfo.setMetro('metro');
   userInfo.setRegion('region');
   userInfo.setZip('zip');

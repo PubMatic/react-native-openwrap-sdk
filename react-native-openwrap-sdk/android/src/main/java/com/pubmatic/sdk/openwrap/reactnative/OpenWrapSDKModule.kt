@@ -5,7 +5,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.pubmatic.sdk.common.OpenWrapSDK
 import com.pubmatic.sdk.common.log.POBLog
-import com.pubmatic.sdk.openwrap.reactnative.SDKPluginConstant.KEY_SDK_VERSION
+import com.pubmatic.sdk.openwrap.reactnative.POBSDKPluginConstant.KEY_SDK_VERSION
 import org.json.JSONException
 
 /**
@@ -46,7 +46,7 @@ class OpenWrapSDKModule(reactContext: ReactApplicationContext) :
    */
   @ReactMethod
   fun setLogLevel(logLevel: Int){
-    val level = SDKPluginParserHelper.parseLogLevel(logLevel)
+    val level = POBSDKPluginParserHelper.parseLogLevel(logLevel)
     level?.let {
       OpenWrapSDK.setLogLevel(it)
     }
@@ -62,41 +62,12 @@ class OpenWrapSDKModule(reactContext: ReactApplicationContext) :
   }
 
   /**
-   * To set ccpa property on {@link OpenWrapSDK}
-   * @param ccpaString expects ccpa string.
-   *
-   */
-  @ReactMethod
-  fun setCCPA(ccpaString: String){
-    OpenWrapSDK.setCCPA(ccpaString)
-  }
-
-  /**
    * To set coppa property on {@link OpenWrapSDK}
    * @param coppa expects Boolean value.
    */
   @ReactMethod
   fun setCoppa(coppa: Boolean){
     OpenWrapSDK.setCoppa(coppa)
-  }
-
-  /**
-   * To set GDPREnabled property on {@link OpenWrapSDK}
-   * @param coppa expects Boolean value.
-   *
-   */
-  @ReactMethod
-  fun setGDPREnabled(gdprEnabled: Boolean){
-    OpenWrapSDK.setGDPREnabled(gdprEnabled)
-  }
-
-  /**
-   * To set gdprConsent property on {@link OpenWrapSDK}
-   * @param gdprConsent expects GDPR string.
-   */
-  @ReactMethod
-  fun setGDPRConsent(gdprConsent: String){
-    OpenWrapSDK.setGDPRConsent(gdprConsent)
   }
 
   /**
@@ -141,9 +112,9 @@ class OpenWrapSDKModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun setApplicationInfo(applicationInfo: String){
     try {
-      OpenWrapSDK.setApplicationInfo(SDKPluginParserHelper.parseJsonToApplicationInfo(applicationInfo))
+      OpenWrapSDK.setApplicationInfo(POBSDKPluginParserHelper.parseJsonToApplicationInfo(applicationInfo))
     }catch (exception: JSONException){
-      POBLog.warn(NAME, SDKPluginConstant.APP_INFO_WARN_MSG + "${exception.message}")
+      POBLog.warn(NAME, POBSDKPluginConstant.APP_INFO_WARN_MSG + "${exception.message}")
     }
   }
 
@@ -159,9 +130,9 @@ class OpenWrapSDKModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun setLocation(location: String){
     try {
-      OpenWrapSDK.setLocation(SDKPluginParserHelper.parseJsonToLocation(location))
+      OpenWrapSDK.setLocation(POBSDKPluginParserHelper.parseJsonToLocation(location))
     }catch (exception: JSONException){
-      POBLog.warn(NAME, SDKPluginConstant.LOCATION_WARN_MSG + "${exception.message}")
+      POBLog.warn(NAME, POBSDKPluginConstant.LOCATION_WARN_MSG + "${exception.message}")
     }
 
   }
@@ -183,10 +154,40 @@ class OpenWrapSDKModule(reactContext: ReactApplicationContext) :
   @ReactMethod
   fun setUserInfo(userInfo: String){
     try {
-      OpenWrapSDK.setUserInfo(SDKPluginParserHelper.parseJsonToUserInfo(userInfo))
+      OpenWrapSDK.setUserInfo(POBSDKPluginParserHelper.parseJsonToUserInfo(userInfo))
     }catch (exception: JSONException){
-      POBLog.warn(NAME, SDKPluginConstant.USERINFO_WARN_MSG + "${exception.message}")
+      POBLog.warn(NAME, POBSDKPluginConstant.USERINFO_WARN_MSG + "${exception.message}")
     }
+  }
+
+  /**
+   * Required methods introduced React Native 0.65
+   * Empty implementation to resolve addListener warning in react native.
+   * <p>
+   *
+   * Warning which is resolved -
+   * WARN new NativeEventEmitter() was called with a non-null argument without the required addListener method.
+   *
+   * @param type Name of the event
+   */
+  @ReactMethod
+  fun addListener(type: String?) {
+    // No action required.
+  }
+
+  /**
+   * Required methods introduced React Native 0.65
+   * Empty implementation to resolve removeListener warning in react native.
+   * <p>
+   * 
+   * Warning which is resolved -
+   * WARN new NativeEventEmitter() was called with a non-null argument without the required removeListeners method.
+   *
+   * @param count Number of events to remove
+   */
+  @ReactMethod
+  fun removeListeners(count: Int?) {
+    // No action required.
   }
 
   /**

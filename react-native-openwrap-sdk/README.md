@@ -10,8 +10,8 @@ OpenWrap SDK lets publishers leverage the power of OpenWrap to request multiple 
 
 ## Get started with OpenWrap SDK React Native plugin
 
-To integrate OpenWrap SDK React Native plugin checkout [this](https://community.pubmatic.com/display/RN/Get+started+with+OpenWrap+SDK+React+Native+plugin)
+To integrate OpenWrap SDK React Native plugin checkout [this](https://help.pubmatic.com/openwrap/docs/about-react-native-plugin)
 
 ## License
 
-- See [LICENSE](https://github.com/PubMatic/react-native-openwrap-sdk/blob/main/LICENSE)
+- See [LICENSE](https://github.com/PubMatic/react-native-openwrap-sdk/LICENSE)

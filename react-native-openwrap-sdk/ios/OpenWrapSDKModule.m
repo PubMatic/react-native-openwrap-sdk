@@ -1,7 +1,7 @@
 #import "OpenWrapSDKModule.h"
 #import <OpenWrapSDK/OpenWrapSDK.h>
 #import "OpenWrapSDKModuleHelper.h"
-#import "POBConstants.h"
+#import "POBRNConstants.h"
 
 @implementation OpenWrapSDKModule
 
@@ -15,24 +15,6 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(setLogLevel:(NSInteger)logLevel) {
     POBSDKLogLevel log_level = [OpenWrapSDKModuleHelper pobSDKLogLevel:logLevel];
     [OpenWrapSDK setLogLevel:log_level];
-}
-
-/*!
- @abstract Sets GDPR compliance, it indicates whether or not the ad request is GDPR(General Data Protection Regulation) compliant.
- @param gdprEnabled boolean value
- - YES : indicates GDPR compliant requests
- - NO : indicates that the request is not GDPR compliant
- */
-RCT_EXPORT_METHOD(setGDPREnabled:(BOOL)gdprEnabled) {
-    [OpenWrapSDK setGDPREnabled:gdprEnabled];
-}
-
-/*!
- @abstract Sets GDPR consent string, A valid Base64 encoded consent string as per https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework.
- @param gdprConsent consent string to convey user consent when GDPR regulations are in effect.
- */
-RCT_EXPORT_METHOD(setGDPRConsent:(NSString *)gdprConsent) {
-    [OpenWrapSDK setGDPRConsent:gdprConsent];
 }
 
 /*!
@@ -105,14 +87,6 @@ RCT_EXPORT_METHOD(allowAVAudioSessionAccess:(BOOL)allow) {
 }
 
 /*!
-@abstract Set the CCPA compliant string, it helps publisher toward compliance with the California Consumer Privacy Act (CCPA).
-@param ccpaString is the CCPA compliant string
-*/
-RCT_EXPORT_METHOD(setCCPA:(NSString *)ccpaString) {
-    [OpenWrapSDK setCCPA:ccpaString];
-}
-
-/*!
  @abstract Sets Application information, which contains various attributes about app, such as application category, store URL, domain, etc, for more relevant ads.
  @param appInfo string having application information
  */
@@ -136,7 +110,7 @@ RCT_EXPORT_METHOD(setUserInfo:(NSString *)userInfo) {
 
 - (NSDictionary *)constantsToExport {
     NSString *sdkVersion = [OpenWrapSDK version];
-    return @{ POB_OW_SDK_VERSION: sdkVersion };
+    return @{ POBRN_OW_SDK_VERSION: sdkVersion };
 }
 
 + (BOOL)requiresMainQueueSetup {

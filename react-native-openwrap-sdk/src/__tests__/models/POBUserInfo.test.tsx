@@ -6,7 +6,6 @@ test('testCreateUserInfo', () => {
   userInfo.setKeywords('keywords');
   userInfo.setGender(POBUserInfo.Gender.FEMALE);
   userInfo.setCity('Pune');
-  userInfo.setCountry('India');
   userInfo.setMetro('metro');
   userInfo.setRegion('region');
   userInfo.setZip('zip');
@@ -15,7 +14,6 @@ test('testCreateUserInfo', () => {
   expect(userInfo.birthYear).toBe(2020);
   expect(userInfo.keywords).toBe('keywords');
   expect(userInfo.city).toBe('Pune');
-  expect(userInfo.country).toBe('India');
   expect(userInfo.metro).toBe('metro');
   expect(userInfo.region).toBe('region');
   expect(userInfo.zip).toBe('zip');

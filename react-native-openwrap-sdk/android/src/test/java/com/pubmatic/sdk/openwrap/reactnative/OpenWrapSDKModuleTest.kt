@@ -31,12 +31,6 @@ class OpenWrapSDKModuleTest {
     }
 
     @Test
-    fun testCCPA(){
-        module?.setCCPA("test");
-        Assert.assertEquals("test", POBInstanceProvider.getSdkConfig().ccpa)
-    }
-
-    @Test
     fun testSetCopa(){
         module?.setCoppa(true)
         POBInstanceProvider.getSdkConfig().isCoppa?.let { Assert.assertTrue(it) }
@@ -46,18 +40,6 @@ class OpenWrapSDKModuleTest {
     fun testInternalBrowser(){
         module?.setUseInternalBrowser(true)
         Assert.assertTrue(POBInstanceProvider.getSdkConfig().isUseInternalBrowser)
-    }
-
-    @Test
-    fun testGDPREnabled(){
-        module?.setGDPREnabled(true)
-        POBInstanceProvider.getSdkConfig().isGdprEnabled?.let { Assert.assertTrue(it) }
-    }
-
-    @Test
-    fun testGDPRConsent(){
-        module?.setGDPRConsent("test")
-        Assert.assertEquals("test", POBInstanceProvider.getSdkConfig().gdprConsent)
     }
 
     @Test
@@ -90,7 +72,7 @@ class OpenWrapSDKModuleTest {
                 " \"longitude\": 1.5,\n" +
                 " \"source\": 1,\n" +
                 "}";
-        val location = SDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
+        val location = POBSDKPluginParserHelper.parseJsonToLocation(locationJsonStr)
         module?.setLocation(locationJsonStr)
         Assert.assertEquals(location.latitude, POBInstanceProvider.getSdkConfig().location?.latitude)
         Assert.assertEquals(location.longitude, POBInstanceProvider.getSdkConfig().location?.longitude)
@@ -99,7 +81,7 @@ class OpenWrapSDKModuleTest {
 
     @Test
     fun testGetVersion(){
-        Assert.assertEquals(OpenWrapSDK.getVersion(), module?.constants?.get(SDKPluginConstant.KEY_SDK_VERSION))
+        Assert.assertEquals(OpenWrapSDK.getVersion(), module?.constants?.get(POBSDKPluginConstant.KEY_SDK_VERSION))
     }
 
     @Test
@@ -123,10 +105,9 @@ class OpenWrapSDKModuleTest {
                 " \"keywords\": \"android, app\"\n" +
                 "}";
         module?.setUserInfo(userJsonStr)
-        val userInfo = SDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
+        val userInfo = POBSDKPluginParserHelper.parseJsonToUserInfo(userJsonStr)
         Assert.assertEquals(userInfo.city, POBInstanceProvider.getSdkConfig().userInfo?.city)
         Assert.assertEquals(userInfo.birthYear, POBInstanceProvider.getSdkConfig().userInfo?.birthYear)
-        Assert.assertEquals(userInfo.country, POBInstanceProvider.getSdkConfig().userInfo?.country)
         Assert.assertEquals(userInfo.metro, POBInstanceProvider.getSdkConfig().userInfo?.metro)
         Assert.assertEquals(userInfo.zip, POBInstanceProvider.getSdkConfig().userInfo?.zip)
         Assert.assertEquals(userInfo.gender, POBInstanceProvider.getSdkConfig().userInfo?.gender)
@@ -150,7 +131,7 @@ class OpenWrapSDKModuleTest {
                 " \"keywords\": \"android, app\"\n" +
                 "}";
         module?.setApplicationInfo(appInfoJsonStr)
-        val applicationInfo = SDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
+        val applicationInfo = POBSDKPluginParserHelper.parseJsonToApplicationInfo(appInfoJsonStr)
         Assert.assertEquals(applicationInfo.keywords, POBInstanceProvider.getSdkConfig().applicationInfo?.keywords)
         Assert.assertEquals(applicationInfo.domain, POBInstanceProvider.getSdkConfig().applicationInfo?.domain)
         Assert.assertEquals(applicationInfo.isPaid, POBInstanceProvider.getSdkConfig().applicationInfo?.isPaid)

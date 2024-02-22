@@ -12,7 +12,7 @@ import java.net.URL
 /**
  * Helper Object to parse to String into OpenWrap SDK specific objects.
  */
-internal object SDKPluginParserHelper {
+internal object POBSDKPluginParserHelper {
 
     /**
      * Parse Json string and returns {@link POBApplicationInfo}
@@ -30,16 +30,24 @@ internal object SDKPluginParserHelper {
     fun parseJsonToApplicationInfo(json: String): POBApplicationInfo {
         val appJson = JSONObject(json)
         val appInfo = POBApplicationInfo()
-        appInfo.domain = appJson.optStringFromJSON(SDKPluginConstant.APP_INFO_DOMAIN_KEY, null)
+        appInfo.domain = appJson.optStringFromJSON(POBSDKPluginConstant.APP_INFO_DOMAIN_KEY, null)
         try {
-            appInfo.storeURL = URL(appJson.optStringFromJSON(SDKPluginConstant.APP_INFO_STORE_URL_KEY, null))
+            val storeUrl = appJson.optStringFromJSON(POBSDKPluginConstant.APP_INFO_STORE_URL_KEY, null)
+            storeUrl?.let { url ->
+                var parsedStoreUrl = url
+                // Remove trailing "/" from the url.
+                while (parsedStoreUrl.endsWith("/")) {
+                    parsedStoreUrl = parsedStoreUrl.removeSuffix("/")
+                }
+                appInfo.storeURL = URL(parsedStoreUrl)
+            }
         }catch (exception: MalformedURLException){
             // No action required.
         }
 
-        appJson.optBooleanFromJSON(SDKPluginConstant.APP_INFO_IS_PAID_KEY, null)?.let { appInfo.setPaid(it) }
-        appInfo.keywords = appJson.optStringFromJSON(SDKPluginConstant.KEYWORDS_KEY, null)
-        appInfo.categories = appJson.optStringFromJSON(SDKPluginConstant.APP_INFO_CATEGORIES_KEY, null)
+        appJson.optBooleanFromJSON(POBSDKPluginConstant.APP_INFO_IS_PAID_KEY, null)?.let { appInfo.setPaid(it) }
+        appInfo.keywords = appJson.optStringFromJSON(POBSDKPluginConstant.KEYWORDS_KEY, null)
+        appInfo.categories = appJson.optStringFromJSON(POBSDKPluginConstant.APP_INFO_CATEGORIES_KEY, null)
 
         return appInfo
     }
@@ -76,9 +84,9 @@ internal object SDKPluginParserHelper {
     @Throws(JSONException::class)
     fun parseJsonToLocation(json: String): POBLocation{
         val locationJson = JSONObject(json)
-        val latitude = locationJson.getDouble(SDKPluginConstant.LOCATION_LATITUDE_KEY)
-        val longitude = locationJson.getDouble(SDKPluginConstant.LOCATION_LONGITUTE_KEY)
-        val sourceStr = locationJson.getInt(SDKPluginConstant.LOCATOIN_SOURCE_KEY)
+        val latitude = locationJson.getDouble(POBSDKPluginConstant.LOCATION_LATITUDE_KEY)
+        val longitude = locationJson.getDouble(POBSDKPluginConstant.LOCATION_LONGITUTE_KEY)
+        val sourceStr = locationJson.getInt(POBSDKPluginConstant.LOCATOIN_SOURCE_KEY)
         val source: POBLocation.Source = when(sourceStr){
             POBLocation.Source.GPS.value -> { POBLocation.Source.GPS }
             POBLocation.Source.IP_ADDRESS.value -> { POBLocation.Source.IP_ADDRESS }
@@ -108,18 +116,17 @@ internal object SDKPluginParserHelper {
     fun parseJsonToUserInfo(json: String): POBUserInfo{
         val locationJson = JSONObject(json)
         val userInfo = POBUserInfo()
-        locationJson.optStringFromJSON(SDKPluginConstant.USER_INFO_CITY_KEY, null)?.let { userInfo.setCity(it) }
-        userInfo.birthYear = locationJson.optInt(SDKPluginConstant.USER_INFO_BIRTH_YEAR_KEY)
-        locationJson.optStringFromJSON(SDKPluginConstant.LOCATION_COUNTRY_KEY, null)?.let { userInfo.setCountry(it) }
-        userInfo.keywords = locationJson.optStringFromJSON(SDKPluginConstant.KEYWORDS_KEY, null)
-        locationJson.optStringFromJSON(SDKPluginConstant.USER_INFO_METRO_KEY, null)?.let { userInfo.setMetro(it) }
-        locationJson.optStringFromJSON(SDKPluginConstant.USER_INFO_REGION_KEY, null)?.let { userInfo.setRegion(it) }
-        locationJson.optStringFromJSON(SDKPluginConstant.LOCATOIN_ZIP_KEY, null)?.let { userInfo.setZip(it) }
-        val genderInt =  locationJson.optInt(SDKPluginConstant.USER_INFO_GENDER_KEY, -1)
+        locationJson.optStringFromJSON(POBSDKPluginConstant.USER_INFO_CITY_KEY, null)?.let { userInfo.setCity(it) }
+        userInfo.birthYear = locationJson.optInt(POBSDKPluginConstant.USER_INFO_BIRTH_YEAR_KEY)
+        userInfo.keywords = locationJson.optStringFromJSON(POBSDKPluginConstant.KEYWORDS_KEY, null)
+        locationJson.optStringFromJSON(POBSDKPluginConstant.USER_INFO_METRO_KEY, null)?.let { userInfo.setMetro(it) }
+        locationJson.optStringFromJSON(POBSDKPluginConstant.USER_INFO_REGION_KEY, null)?.let { userInfo.setRegion(it) }
+        locationJson.optStringFromJSON(POBSDKPluginConstant.LOCATOIN_ZIP_KEY, null)?.let { userInfo.setZip(it) }
+        val genderInt =  locationJson.optInt(POBSDKPluginConstant.USER_INFO_GENDER_KEY, -1)
         val gender:POBUserInfo.Gender? = when(genderInt){
-            SDKPluginConstant.GENDER_MALE -> { POBUserInfo.Gender.MALE }
-            SDKPluginConstant.GENDER_FEMALE -> { POBUserInfo.Gender.FEMALE }
-            SDKPluginConstant.GENDER_OTHER -> { POBUserInfo.Gender.OTHER }
+            POBSDKPluginConstant.GENDER_MALE -> { POBUserInfo.Gender.MALE }
+            POBSDKPluginConstant.GENDER_FEMALE -> { POBUserInfo.Gender.FEMALE }
+            POBSDKPluginConstant.GENDER_OTHER -> { POBUserInfo.Gender.OTHER }
             else -> { null }
         }
         gender?.let {
